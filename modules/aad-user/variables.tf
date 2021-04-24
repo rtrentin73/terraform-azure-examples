@@ -3,6 +3,11 @@ variable "username" {
   description = "Username"
 }
 
+variable "group" {
+  type        = string
+  description = "Group"
+}
+
 variable "domain_name" {
   type        = string
   description = "AAD domain name"

@@ -6,6 +6,9 @@ variable "userlist" {
   type = map(object({
     username  = string
     group = string
+    hub = string
+    spoke1 = string
+    spoke2 = string 
   }))
 }
 variable "password" {

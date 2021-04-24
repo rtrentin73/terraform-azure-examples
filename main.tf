@@ -41,5 +41,8 @@ module "aad-user" {
   username    = each.value.username
   group =       each.value.group
   password    = var.password
+  hub = each.value.hub 
+  spoke1 = each.value.spoke1
+  spoke2 = each.value.spoke2 
   domain_name = data.azuread_domains.aad_domains.domains[0].domain_name
 }

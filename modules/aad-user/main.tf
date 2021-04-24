@@ -16,3 +16,25 @@ resource "azuread_group_member" "member" {
   member_object_id = azuread_user.user.id
 }
 
+data "azurerm_subscription" "subscriptionhub" {
+  subscription_id = var.hub 
+}
+
+data "azurerm_subscription" "subscriptionspoke1" {
+  subscription_id = var.spoke1
+}
+
+data "azurerm_subscription" "subscriptionspoke2" {
+  subscription_id = var.spoke2
+}
+
+resource "azurerm_role_assignment" "role" {
+  for_each = {
+   hub = data.azurerm_subscription.subscriptionhub.id 
+   spoke1= data.azurerm_subscription.subscriptionspoke1.id 
+   spoke2 = data.azurerm_subscription.subscriptionspoke2.id 
+  }
+  scope                = each.value
+  role_definition_name = "Owner"
+  principal_id         = data.azuread_group.group.id 
+}
